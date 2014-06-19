@@ -27,7 +27,7 @@ namespace Vrachtschip_applicatie
         //voegt een schip toe aan de database
         public bool AddShip(Vrachtschip schip)
         {
-            ID = GetInsertID("VrachtshipID", "Vrachtschip");
+            ID = GetInsertID("VrachtschipID", "Vrachtschip");
             ID++;
             string sql = "INSERT INTO Vrachtschip (VrachtschipID, Soort, MaxHoogte, AantalRijen, ContainersPerRij, AantalStroom) Values ( :ID, :Soort, :MaxHoogte, :AantalRijen, :MaxHoogte, :AantalStroom)";
 

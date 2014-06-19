@@ -23,7 +23,7 @@ namespace Vrachtschip_applicatie
         public bool Add(Vrachtschip vrachtschip)
         {
             foreach (Vrachtschip v in schepen)
-                if (v.ID == vrachtschip.ID)
+                if (v.Type == vrachtschip.Type)
                 {
                     return false;
                 }
@@ -42,17 +42,6 @@ namespace Vrachtschip_applicatie
         //deze methode voegt een bedrijf toe aan het systeem en de database
         public bool Add(Bedrijf bedrijf)
         {
-            foreach (Bedrijf b in bedrijven)
-                if (b.ID == bedrijf.ID)
-                {
-                    return false;
-                }
-                else
-                {
-                    bedrijven.Add(bedrijf);
-                    db.AddCompany(bedrijf);
-                    return true;
-                }
             bedrijven.Add(bedrijf);
             db.AddCompany(bedrijf);
 

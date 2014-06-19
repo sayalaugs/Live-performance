@@ -38,7 +38,17 @@ namespace Vrachtschip_applicatie
 
         private void btnGenerateLayout_Click(object sender, EventArgs e)
         {
-            Vrachtschip ship = db.GetShip(cbShips.SelectedItem.ToString());
+            string selectedshiptype = cbShips.SelectedText;
+            string selecteddestination = cbDestination.SelectedText;
+
+            if (selectedshiptype == "" || selecteddestination == "")
+            {
+                MessageBox.Show("Er is geen schip type of bestemming geselecteerd");
+            }
+            else
+            {
+                Vrachtschip ship = db.GetShip(cbShips.SelectedItem.ToString());
+            }
         }
 
         private void btnAddDestination_Click(object sender, EventArgs e)
