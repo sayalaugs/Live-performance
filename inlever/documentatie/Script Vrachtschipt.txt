@@ -7,7 +7,7 @@ DROP TABLE Bedrijf CASCADE CONSTRAINTS;
 
 --aanmaken van tables
 Create table Vrachtschip(
-VrachtshipID			Number(30) primary key not null,
+VrachtschipID			Number(30) primary key not null,
 Soort				VarChar2(30),
 MaxHoogte			Number(30),
 AantalRijen			Number(30),
@@ -24,7 +24,7 @@ Create table Transport(
 TransportID			Number(30) primary key not null,
 VrachtschipID			Number(30) not null,
 BestemmingsNaam			VarChar2(30) not null,
-CONSTRAINT fk_Vrachtschip FOREIGN KEY (VrachtschipID) REFERENCES Vrachtschip(VrachtshipID),
+CONSTRAINT fk_Vrachtschip FOREIGN KEY (VrachtschipID) REFERENCES Vrachtschip(VrachtschipID),
 CONSTRAINT fk_Bestemming FOREIGN KEY (BestemmingsNaam) REFERENCES Bestemming(Naam)
 );
 
