@@ -1,0 +1,7 @@
+c:\users\saya\documents\visual studio 2010\Projects\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip_applicatie.Properties.Resources.resources
+c:\users\saya\documents\visual studio 2010\Projects\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip applicatie.csproj.GenerateResource.Cache
+c:\users\saya\documents\visual studio 2010\Projects\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip_applicatie.Form1.resources
+c:\users\saya\documents\visual studio 2010\Projects\Vrachtschip applicatie\Vrachtschip applicatie\bin\Debug\Vrachtschip applicatie.exe
+c:\users\saya\documents\visual studio 2010\Projects\Vrachtschip applicatie\Vrachtschip applicatie\bin\Debug\Vrachtschip applicatie.pdb
+c:\users\saya\documents\visual studio 2010\Projects\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip applicatie.exe
+c:\users\saya\documents\visual studio 2010\Projects\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip applicatie.pdb
