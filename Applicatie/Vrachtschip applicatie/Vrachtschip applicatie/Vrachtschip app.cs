@@ -20,20 +20,68 @@ namespace Vrachtschip_applicatie
             InitializeComponent();
             db = new DatabaseConnection();
             ctrl = new CSCcontrol();
-
+            
+            //haalt alle schepen en bestemmingen op uit de database
             ctrl.schepen = db.GetAllShips();
-
-            cbShips.DataSource = Enum.GetValues(typeof(Container.ContainerType));
-
+            ctrl.bestemmingen = db.GetAllDestinations();
+            
+            //voegt de gevonden schepen en bestemmingen toe aan de combobox
             foreach (Vrachtschip v in ctrl.schepen)
             {
-                cbDestination.Items.Add(v.Type);
+                cbShips.Items.Add(v.Type.ToString());
+            }
+            foreach (Bestemming b in ctrl.bestemmingen)
+            {
+                cbDestination.Items.Add(b.Naam.ToString());
             }
         }
 
         private void btnGenerateLayout_Click(object sender, EventArgs e)
         {
-            Vrachtschip ship = db.GetShip("MPP-F3");
+            Vrachtschip ship = db.GetShip(cbShips.SelectedItem.ToString());
+        }
+
+        private void btnAddDestination_Click(object sender, EventArgs e)
+        {
+            string name = tbDestinationName.Text;
+            string country = tbDestinationCountry.Text;
+
+            Bestemming destination = new Bestemming(name, country);
+            if (ctrl.Add(destination))
+            {
+                MessageBox.Show("De bestemming is toegevoegd!");
+            }
+
+        }
+
+        private void btnAddShip_Click(object sender, EventArgs e)
+        {
+            string type = tbShipType.Text;
+            int Hight = Convert.ToInt32(tbShipHight.Text);
+            int rows = Convert.ToInt32(tbShipRows.Text);
+            int containersperrow = Convert.ToInt32(tbShipContPerRow.Text);
+            int amountofpower = Convert.ToInt32(tbShipAmountOfElectricty.Text);
+
+            Vrachtschip ship = new Vrachtschip(type, Hight, rows, containersperrow, amountofpower);
+
+            if (ctrl.Add(ship))
+            {
+                MessageBox.Show("Het vrachtschip is toegevoegd!");
+            }
+        }
+
+        private void btnAddCompany_Click(object sender, EventArgs e)
+        {
+            string name = tbCompanyName.Text;
+            string contact = tbCompanyContactPerson.Text;
+            int kvk = Convert.ToInt32(tbCompanyKvknr.Text);
+
+            Bedrijf company = new Bedrijf(name, contact, kvk);
+
+            if (ctrl.Add(company))
+            {
+                MessageBox.Show("Het bedrijf is toegevoegd!");
+            }
         }
     }
 }

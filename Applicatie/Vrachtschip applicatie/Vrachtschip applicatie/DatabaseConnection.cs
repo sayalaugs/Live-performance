@@ -224,6 +224,38 @@ namespace Vrachtschip_applicatie
             return null;
         }
 
+        public List<Bestemming> GetAllDestinations()
+        {
+            List<Bestemming> databaseDestinations = new List<Bestemming>();
+            string sql = "Select * FROM Bestemming";
+            OracleCommand command = new OracleCommand(sql, conn);
+            command.CommandType = System.Data.CommandType.Text;
+            try
+            {
+                conn.Open();
+                OracleDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    string Naam = reader["Naam"].ToString();
+                    string Land = reader["Land"].ToString();
+
+
+                    Bestemming bestemming = new Bestemming(Naam, Land);
+                    databaseDestinations.Add(bestemming);
+                }
+                return databaseDestinations;
+            }
+            catch
+            {
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
+        }
+
         //haalt het hoogste id op uit een aangegeven tabel
         private int GetInsertID(string ID, string tabelnaam)
         {
