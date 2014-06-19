@@ -1,0 +1,76 @@
+DROP TABLE Vrachtschip CASCADE CONSTRAINTS;
+DROP TABLE Transport CASCADE CONSTRAINTS;
+DROP TABLE Bestemming CASCADE CONSTRAINTS;
+DROP TABLE Shipcontainer CASCADE CONSTRAINTS;
+DROP TABLE Bedrijf CASCADE CONSTRAINTS;
+
+
+--aanmaken van tables
+Create table Vrachtschip(
+VrachtshipID			Number(30) primary key not null,
+Soort				VarChar2(30),
+MaxHoogte			Number(30),
+AantalRijen			Number(30),
+ContainersPerRij		Number(30),
+AantalStroom			Number(30)
+);
+
+Create table Bestemming(
+Naam				VarChar2(30) primary key not null,
+Land				VarChar2(30) not null
+);
+
+Create table Transport(
+TransportID			Number(30) primary key not null,
+VrachtschipID			Number(30) not null,
+BestemmingsNaam			VarChar2(30) not null,
+CONSTRAINT fk_Vrachtschip FOREIGN KEY (VrachtschipID) REFERENCES Vrachtschip(VrachtshipID),
+CONSTRAINT fk_Bestemming FOREIGN KEY (BestemmingsNaam) REFERENCES Bestemming(Naam)
+);
+
+
+Create table Bedrijf(
+BedrijfsID			Number(30) primary key not null,
+ParentbedrijfID			number(30),
+Naam				VarChar2(30) not null,
+Contactpersoon			VarChar2(30) not null,
+KVKnr				Number(30) not null,
+CONSTRAINT fk_Bedrijf_Recursive FOREIGN KEY (ParentbedrijfID) REFERENCES Bedrijf(BedrijfsID)
+);
+
+Create table Shipcontainer(
+ShipcontainerID			Number(30) primary key not null,
+Gewicht			        Number(30),
+Soort 				VarChar2(30) Check (Soort = 'Normaal' or Soort ='Waardevol' or Soort ='Gekoeld'),
+GPSnr				Number(30),
+Ingepland			VarChar(1) Check (Ingepland = 'Y' or Ingepland ='N'),
+TransportID			Number(30),
+BedrijfsID			Number(30),
+CONSTRAINT fk_Transport FOREIGN KEY (TransportID) REFERENCES Transport(TransportID),
+CONSTRAINT fk_Bedrijf FOREIGN KEY (BedrijfsID) REFERENCES Bedrijf(BedrijfsID)
+);
+
+--testdata
+
+--vrachtschip
+Insert into Vrachtschip values(1, 'MPP-XSF1', 3, 3, 5, 9);
+Insert into Vrachtschip values(2, 'MPP-SF1', 4, 7, 10, 21);
+Insert into Vrachtschip values(3, 'MPP-F3', 5, 9, 12, 27);
+Insert into Vrachtschip values(4, 'FM-A-MC', 6, 9, 15, 27);
+
+
+--bestemming
+Insert into Bestemming values('Port of Antwerp', 'Belgie');
+Insert into Bestemming values('Rotterdam', 'Nederland');
+Insert into Bestemming values('Bergen', 'Noorwegen');
+Insert into Bestemming values('Toronto', 'Canada');
+Insert into Bestemming values('Montreal', 'Canada');
+Insert into Bestemming values('Horta', 'Portugal');
+
+
+--bedrijf
+Insert into Bedrijf values(1, null, 'Saya bedrijf', 'Saya Laugs', '12346');
+
+
+--container
+Insert into Shipcontainer values(1, 5000, 'Gekoeld', null, 'N', null, 1);
