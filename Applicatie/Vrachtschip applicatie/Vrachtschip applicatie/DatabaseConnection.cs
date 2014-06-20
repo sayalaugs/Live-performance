@@ -88,6 +88,36 @@ namespace Vrachtschip_applicatie
             return false;
         }
 
+        public bool AddContainer(Container container)
+        {
+            ID = GetInsertID("SHIPCONTAINERID", "ShipContainer");
+            ID++;
+            string sql = "INSERT INTO ShipContainer (SHIPCONTAINERID, GEWICHT, SOORT, BEDRIJFSID) Values ( :ID, :Gewicht, :Soort, :BedrijfsID)";
+
+            OracleCommand command = new OracleCommand(sql, conn);
+
+            command.Parameters.Add(":ID", ID);
+            command.Parameters.Add(":Gewicht", container.Gewicht);
+            command.Parameters.Add(":Soort", container.Type.ToString());
+            command.Parameters.Add(":BedrijfsID", container.Bedrijf.ID);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch
+            {
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }
+
         //voegt een bestemming toe aan de database
         public bool AddDestination(Bestemming bestemming)
         {
@@ -151,7 +181,8 @@ namespace Vrachtschip_applicatie
             }
             return null;
         }
-
+        
+        //haalt een vrachtschip op uit de database aan de hand van het meegegeven vrachtschip type
         public Vrachtschip GetShip(string ShipType)
         {
             String cmd = "Select * from Vrachtschip where Soort = :ShipType";
@@ -210,6 +241,7 @@ namespace Vrachtschip_applicatie
 
 
                     Vrachtschip vrachtschip = new Vrachtschip(Soort, MaxHoogte, AantalRijen, ContainersPerRij, AantalStroom);
+                    vrachtschip.ID = VrachtschipID;
                     databaseShips.Add(vrachtschip);
                 }
                 return databaseShips;
@@ -224,6 +256,7 @@ namespace Vrachtschip_applicatie
             return null;
         }
 
+        //haalt alle bestemmingen op uit de database
         public List<Bestemming> GetAllDestinations()
         {
             List<Bestemming> databaseDestinations = new List<Bestemming>();
@@ -245,6 +278,41 @@ namespace Vrachtschip_applicatie
                     databaseDestinations.Add(bestemming);
                 }
                 return databaseDestinations;
+            }
+            catch
+            {
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
+        }
+
+        //haalt alle bedrijven op uit de database
+        public List<Bedrijf> GetAllCompanys()
+        {
+            List<Bedrijf> databaseCompanys = new List<Bedrijf>();
+            string sql = "Select * FROM Bedrijf";
+            OracleCommand command = new OracleCommand(sql, conn);
+            command.CommandType = System.Data.CommandType.Text;
+            try
+            {
+                conn.Open();
+                OracleDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    int BedrijfsID = reader.GetInt32(0);
+                    string naam = reader["NAAM"].ToString();
+                    string contactpersoon = reader["CONTACTPERSOON"].ToString();
+                    int KVKnr = Convert.ToInt32(reader["KVKNR"]);
+
+
+                    Bedrijf bedrijf = new Bedrijf(naam, contactpersoon, KVKnr);
+                    bedrijf.ID = BedrijfsID;
+                    databaseCompanys.Add(bedrijf);
+                }
+                return databaseCompanys;
             }
             catch
             {

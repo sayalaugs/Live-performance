@@ -13,8 +13,6 @@ namespace Vrachtschip_applicatie
         public string Contactpersoon { get; private set; }//contactpersoon van het bedrijf
         public int KVKnr { get; private set; }//kvk nummer van het bedrijf
 
-        //lijst van containers die van dit bedrijf zijn
-        List<Container> containers = new List<Container>();
 
         //contructer van de klasse
         public Bedrijf(string Naam, string Contactpersoon, int KVKnr)

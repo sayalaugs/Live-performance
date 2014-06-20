@@ -14,6 +14,7 @@ namespace Vrachtschip_applicatie
         public List<Vrachtschip> schepen = new List<Vrachtschip>();
         public List<Bedrijf> bedrijven = new List<Bedrijf>();
         public List<Bestemming> bestemmingen = new List<Bestemming>();
+        public List<Container> containers = new List<Container>();
 
         public CSCcontrol()
         {
@@ -64,6 +65,25 @@ namespace Vrachtschip_applicatie
                 }
             bestemmingen.Add(bestemming);
             db.AddDestination(bestemming);
+
+            return true;
+        }
+
+        public bool Add(Container container)
+        {
+            foreach (Container c in containers)
+                if (c.ID == container.ID)
+                {
+                    return false;
+                }
+                else
+                {
+                    containers.Add(container);
+                    db.AddContainer(container);
+                    return true;
+                }
+            containers.Add(container);
+            db.AddContainer(container);
 
             return true;
         }

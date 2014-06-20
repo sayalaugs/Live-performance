@@ -36,65 +36,31 @@ namespace Vrachtschip_applicatie
             }
         }
 
+        //genereerd een indeling voor een schip
         private void btnGenerateLayout_Click(object sender, EventArgs e)
         {
+            //het geselecteerde schip en bestemming
             string selectedshiptype = cbShips.SelectedText;
             string selecteddestination = cbDestination.SelectedText;
 
+            //checked of bestemming en schip geselecteerd zijn
             if (selectedshiptype == "" || selecteddestination == "")
             {
                 MessageBox.Show("Er is geen schip type of bestemming geselecteerd");
             }
             else
             {
+                //haalt het geselecteerde schip op uit de database
                 Vrachtschip ship = db.GetShip(cbShips.SelectedItem.ToString());
-
-                //hoogte, aantal rijen, lengte rijen
-                int[, ,] array = new int[3, 3, 7];
+                //de grootte van het schip opgehaald
+                int rijen = ship.AantalRijen;
+                int containersperrij = ship.ContainersPerRij;
+                int hoogte = ship.MaxHoogte;
                 
-            }
-        }
+                // array met hoogte, aantal rijen, lengte rijen van een schip
+                //int[, ,] array = new int[rijen, containersperrij, hoogte];
+                
 
-        private void btnAddDestination_Click(object sender, EventArgs e)
-        {
-            string name = tbDestinationName.Text;
-            string country = tbDestinationCountry.Text;
-
-            Bestemming destination = new Bestemming(name, country);
-            if (ctrl.Add(destination))
-            {
-                MessageBox.Show("De bestemming is toegevoegd!");
-            }
-
-        }
-
-        private void btnAddShip_Click(object sender, EventArgs e)
-        {
-            string type = tbShipType.Text;
-            int Hight = Convert.ToInt32(tbShipHight.Text);
-            int rows = Convert.ToInt32(tbShipRows.Text);
-            int containersperrow = Convert.ToInt32(tbShipContPerRow.Text);
-            int amountofpower = Convert.ToInt32(tbShipAmountOfElectricty.Text);
-
-            Vrachtschip ship = new Vrachtschip(type, Hight, rows, containersperrow, amountofpower);
-
-            if (ctrl.Add(ship))
-            {
-                MessageBox.Show("Het vrachtschip is toegevoegd!");
-            }
-        }
-
-        private void btnAddCompany_Click(object sender, EventArgs e)
-        {
-            string name = tbCompanyName.Text;
-            string contact = tbCompanyContactPerson.Text;
-            int kvk = Convert.ToInt32(tbCompanyKvknr.Text);
-
-            Bedrijf company = new Bedrijf(name, contact, kvk);
-
-            if (ctrl.Add(company))
-            {
-                MessageBox.Show("Het bedrijf is toegevoegd!");
             }
         }
     }

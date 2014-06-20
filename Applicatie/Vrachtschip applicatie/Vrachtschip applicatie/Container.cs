@@ -13,6 +13,7 @@ namespace Vrachtschip_applicatie
         public int Gewicht { get; private set; }// het gewicht van de container in kg
         public Transport Transport { get; private set; } // dit bevat de transport gegevens waar de container op mee is geweest
         public ContainerType Type { get; private set; } // het soort container
+        public Bedrijf Bedrijf { get; private set; } // het bedrijf waar de container van is
         public int GPScode { get; private set; }//wordt pas gebruikt in volgende versie
         public bool Ingepland = false;//een check om te kijken of de container al is ingepland op een schip ofniet
 
@@ -25,10 +26,11 @@ namespace Vrachtschip_applicatie
         }
 
         //de constructor
-        public Container(int Gewicht, ContainerType Type)
+        public Container(int Gewicht, ContainerType Type, Bedrijf Bedrijf)
         {
             this.Gewicht = Gewicht;
             this.Type = Type;
+            this.Bedrijf = Bedrijf;
         }
     }
 }
