@@ -33,12 +33,13 @@
             this.cbDestination = new System.Windows.Forms.ComboBox();
             this.cbShips = new System.Windows.Forms.ComboBox();
             this.btnGenerateLayout = new System.Windows.Forms.Button();
-            this.tbGeneratedLayout = new System.Windows.Forms.TextBox();
             this.btnExportInfo = new System.Windows.Forms.Button();
             this.btnMarkContainers = new System.Windows.Forms.Button();
-            this.tbLegend = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnMenu = new System.Windows.Forms.Button();
+            this.lbGeneratedLayout = new System.Windows.Forms.ListBox();
+            this.lbLegenda = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -85,14 +86,6 @@
             this.btnGenerateLayout.UseVisualStyleBackColor = true;
             this.btnGenerateLayout.Click += new System.EventHandler(this.btnGenerateLayout_Click);
             // 
-            // tbGeneratedLayout
-            // 
-            this.tbGeneratedLayout.Location = new System.Drawing.Point(325, 40);
-            this.tbGeneratedLayout.Multiline = true;
-            this.tbGeneratedLayout.Name = "tbGeneratedLayout";
-            this.tbGeneratedLayout.Size = new System.Drawing.Size(323, 411);
-            this.tbGeneratedLayout.TabIndex = 5;
-            // 
             // btnExportInfo
             // 
             this.btnExportInfo.Location = new System.Drawing.Point(211, 126);
@@ -101,6 +94,7 @@
             this.btnExportInfo.TabIndex = 6;
             this.btnExportInfo.Text = "Exporteer indelings gegevens";
             this.btnExportInfo.UseVisualStyleBackColor = true;
+            this.btnExportInfo.Click += new System.EventHandler(this.btnExportInfo_Click);
             // 
             // btnMarkContainers
             // 
@@ -112,18 +106,10 @@
             this.btnMarkContainers.UseVisualStyleBackColor = true;
             this.btnMarkContainers.Visible = false;
             // 
-            // tbLegend
-            // 
-            this.tbLegend.Location = new System.Drawing.Point(94, 286);
-            this.tbLegend.Multiline = true;
-            this.tbLegend.Name = "tbLegend";
-            this.tbLegend.Size = new System.Drawing.Size(225, 165);
-            this.tbLegend.TabIndex = 8;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(91, 270);
+            this.label3.Location = new System.Drawing.Point(91, 266);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 9;
@@ -138,17 +124,49 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Gegenereerde indeling:";
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Location = new System.Drawing.Point(6, 3);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnMenu.TabIndex = 11;
+            this.btnMenu.Text = "Menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
+            // lbGeneratedLayout
+            // 
+            this.lbGeneratedLayout.FormattingEnabled = true;
+            this.lbGeneratedLayout.Location = new System.Drawing.Point(325, 40);
+            this.lbGeneratedLayout.Name = "lbGeneratedLayout";
+            this.lbGeneratedLayout.Size = new System.Drawing.Size(336, 407);
+            this.lbGeneratedLayout.TabIndex = 13;
+            // 
+            // lbLegenda
+            // 
+            this.lbLegenda.FormattingEnabled = true;
+            this.lbLegenda.Items.AddRange(new object[] {
+            "_  = Lege positie",
+            "C = Normale Container",
+            "V = Waardevolle Container",
+            "E = Actief gekoelde Container"});
+            this.lbLegenda.Location = new System.Drawing.Point(94, 287);
+            this.lbLegenda.Name = "lbLegenda";
+            this.lbLegenda.Size = new System.Drawing.Size(225, 160);
+            this.lbLegenda.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 466);
+            this.Controls.Add(this.lbLegenda);
+            this.Controls.Add(this.lbGeneratedLayout);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbLegend);
             this.Controls.Add(this.btnMarkContainers);
             this.Controls.Add(this.btnExportInfo);
-            this.Controls.Add(this.tbGeneratedLayout);
             this.Controls.Add(this.btnGenerateLayout);
             this.Controls.Add(this.cbShips);
             this.Controls.Add(this.cbDestination);
@@ -168,12 +186,13 @@
         private System.Windows.Forms.ComboBox cbDestination;
         private System.Windows.Forms.ComboBox cbShips;
         private System.Windows.Forms.Button btnGenerateLayout;
-        private System.Windows.Forms.TextBox tbGeneratedLayout;
         private System.Windows.Forms.Button btnExportInfo;
         private System.Windows.Forms.Button btnMarkContainers;
-        private System.Windows.Forms.TextBox tbLegend;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnMenu;
+        private System.Windows.Forms.ListBox lbGeneratedLayout;
+        private System.Windows.Forms.ListBox lbLegenda;
     }
 }
 

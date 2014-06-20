@@ -98,12 +98,18 @@ namespace Vrachtschip_applicatie
             Container.ContainerType type = (Container.ContainerType)Enum.Parse(typeof(Container.ContainerType), cbContainerType.SelectedItem.ToString());
 
             Container container = new Container(weight, type, company);
-            container.
 
             if (ctrl.Add(container))
             {
                 MessageBox.Show("De container is toegevoegd!");
             }
+        }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            Menu menu = new Menu();
+            this.Hide();
+            menu.Show();
         }
     }
 }

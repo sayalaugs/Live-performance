@@ -73,4 +73,9 @@ Insert into Bedrijf values(1, null, 'Saya bedrijf', 'Saya Laugs', '12346');
 
 
 --container
-Insert into Shipcontainer values(1, 5000, 'Gekoeld', null, 'N', null, 1);
+Insert into Shipcontainer values(1, 5000, 'Normaal', null, 'N', null, 1);
+Insert into Shipcontainer values(2, 4000, 'Normaal', null, 'N', null, 1);
+Insert into Shipcontainer values(3, 8000, 'Gekoeld', null, 'N', null, 1);
+Insert into Shipcontainer values(4, 9000, 'Gekoeld', null, 'N', null, 1);
+Insert into Shipcontainer values(5, 10000, 'Waardevol', null, 'N', null, 1);
+Insert into Shipcontainer values(6, 12000, 'Waardevol', null, 'N', null, 1);

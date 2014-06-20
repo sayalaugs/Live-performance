@@ -146,6 +146,31 @@ namespace Vrachtschip_applicatie
             return false;
         }
 
+        public bool UpdateContainerPlanned(Container container)
+        {
+            string sql = "UPDATE shipcontainer SET INGEPLAND = 'Y' where SHIPCONTAINERID = '1'";
+
+            OracleCommand command = new OracleCommand(sql, conn);
+
+            command.Parameters.Add(":ID", container.ID);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch
+            {
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }
+
         //haalt een bedrijf op uit de database aan de hand van een bedrijfsnaam
         public Bedrijf GetCompany(string companyname)
         {
@@ -178,6 +203,40 @@ namespace Vrachtschip_applicatie
             finally
             {
                 conn.Close();
+            }
+            return null;
+        }
+
+        public Bedrijf GetCompany(int ID)
+        {
+            String cmd = "Select * from Bedrijf where BEDRIJFSID = :ID";
+            OracleCommand command = new OracleCommand(cmd, conn);
+            command.CommandType = System.Data.CommandType.Text;
+
+            command.Parameters.Add(":ID", ID);
+
+            try
+            {
+                OracleDataReader reader = command.ExecuteReader();
+                reader.Read();
+                int BedrijfsID = Convert.ToInt32(reader["BedrijfsID"].ToString());
+                string Naam = reader["Naam"].ToString();
+                string ContactPersoon = reader["Contactpersoon"].ToString();
+                int KVKnr = Convert.ToInt32(reader["KVKnr"]);
+
+                Bedrijf bedrijf = new Bedrijf(Naam, ContactPersoon, KVKnr);
+                bedrijf.ID = BedrijfsID;
+
+                return bedrijf;
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
             }
             return null;
         }
@@ -313,6 +372,52 @@ namespace Vrachtschip_applicatie
                     databaseCompanys.Add(bedrijf);
                 }
                 return databaseCompanys;
+            }
+            catch
+            {
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
+        }
+
+        public List<Container> GetAllContainers()
+        {
+            List<Container> databaseContainers = new List<Container>();
+            string sql = "Select * FROM Shipcontainer";
+            OracleCommand command = new OracleCommand(sql, conn);
+            command.CommandType = System.Data.CommandType.Text;
+            try
+            {
+                conn.Open();
+                OracleDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    int ContainerID = reader.GetInt32(0);
+                    int gewicht = Convert.ToInt32(reader["GEWICHT"]);
+                    Container.ContainerType soort = (Container.ContainerType)Enum.Parse(typeof(Container.ContainerType), reader["SOORT"].ToString());
+                    string ingepland = reader["INGEPLAND"].ToString();
+                    int bedrijfsid = Convert.ToInt32(reader["BEDRIJFSID"]);
+
+                    Bedrijf company = GetCompany(bedrijfsid);
+
+                    Container container = new Container(gewicht, soort, company);
+                    container.ID = ContainerID;
+
+                    if (ingepland == "Y")
+                    {
+                        container.Ingepland = true;
+                    }
+                    else
+                    {
+                        container.Ingepland = false;
+                    }
+
+                    databaseContainers.Add(container);
+                }
+                return databaseContainers;
             }
             catch
             {

@@ -64,6 +64,7 @@
             this.cbContainerType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbContainerDestination = new System.Windows.Forms.ComboBox();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -79,7 +80,7 @@
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.label16);
-            this.groupBox3.Location = new System.Drawing.Point(53, 119);
+            this.groupBox3.Location = new System.Drawing.Point(12, 184);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(262, 153);
             this.groupBox3.TabIndex = 16;
@@ -157,7 +158,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(357, 18);
+            this.groupBox2.Location = new System.Drawing.Point(295, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(385, 163);
             this.groupBox2.TabIndex = 15;
@@ -261,7 +262,7 @@
             this.groupBox1.Controls.Add(this.tbDestinationName);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Location = new System.Drawing.Point(53, 18);
+            this.groupBox1.Location = new System.Drawing.Point(12, 45);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(262, 87);
             this.groupBox1.TabIndex = 14;
@@ -321,7 +322,7 @@
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.cbContainerCompany);
             this.groupBox4.Controls.Add(this.btnAddContainer);
-            this.groupBox4.Location = new System.Drawing.Point(357, 194);
+            this.groupBox4.Location = new System.Drawing.Point(295, 188);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(385, 149);
             this.groupBox4.TabIndex = 17;
@@ -405,11 +406,22 @@
             this.cbContainerDestination.Size = new System.Drawing.Size(121, 21);
             this.cbContainerDestination.TabIndex = 8;
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Location = new System.Drawing.Point(12, 3);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(75, 23);
+            this.btnMenu.TabIndex = 18;
+            this.btnMenu.Text = "Menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
             // AddItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 368);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -466,5 +478,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbContainerDestination;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnMenu;
     }
 }

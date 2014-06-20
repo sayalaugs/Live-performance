@@ -32,5 +32,21 @@ namespace Vrachtschip_applicatie
             this.Type = Type;
             this.Bedrijf = Bedrijf;
         }
+
+        public override string ToString()
+        {
+            if (Type == ContainerType.Gekoeld)
+            {
+                return "E ";
+            }
+            else if (Type == ContainerType.Waardevol)
+            {
+                return "V ";
+            }
+            else
+            {
+                return "C ";
+            }
+        }
     }
 }
