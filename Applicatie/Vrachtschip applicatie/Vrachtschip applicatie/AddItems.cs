@@ -48,10 +48,17 @@ namespace Vrachtschip_applicatie
             string name = tbDestinationName.Text;
             string country = tbDestinationCountry.Text;
 
-            Bestemming destination = new Bestemming(name, country);
-            if (ctrl.Add(destination))
+            if (name != "" && country != "")
             {
-                MessageBox.Show("De bestemming is toegevoegd!");
+                Bestemming destination = new Bestemming(name, country);
+                if (ctrl.Add(destination))
+                {
+                    MessageBox.Show("De bestemming is toegevoegd!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("U heeft niet alle bestemings gegevens ingevoerd");
             }
         }
 
@@ -63,6 +70,7 @@ namespace Vrachtschip_applicatie
             int rows = Convert.ToInt32(tbShipRows.Text);
             int containersperrow = Convert.ToInt32(tbShipContPerRow.Text);
             int amountofpower = Convert.ToInt32(tbShipAmountOfElectricty.Text);
+
 
             Vrachtschip ship = new Vrachtschip(type, Hight, rows, containersperrow, amountofpower);
 
@@ -77,13 +85,24 @@ namespace Vrachtschip_applicatie
         {
             string name = tbCompanyName.Text;
             string contact = tbCompanyContactPerson.Text;
-            int kvk = Convert.ToInt32(tbCompanyKvknr.Text);
-
-            Bedrijf company = new Bedrijf(name, contact, kvk);
-
-            if (ctrl.Add(company))
+            int kvk = 0;
+            if (tbCompanyKvknr.Text != "")
             {
-                MessageBox.Show("Het bedrijf is toegevoegd!");
+               kvk = int.Parse(tbCompanyKvknr.Text);
+            }
+
+            if (name != "" && contact != "" && kvk != 0)
+            {
+                Bedrijf company = new Bedrijf(name, contact, kvk);
+
+                if (ctrl.Add(company))
+                {
+                    MessageBox.Show("Het bedrijf is toegevoegd!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("U heeft niet alle bedrijfs gegevens ingevoerd");
             }
         }
 
