@@ -41,9 +41,7 @@ namespace Vrachtschip_applicatie
             gewonecontainers = new List<Container>();
             gekoeldecontainers = new List<Container>();
 
-            waardevollecount = waardevollecontainers.Count;
-            gewonecount = gewonecontainers.Count;
-            gekoeldecount = gekoeldecontainers.Count;
+
 
             //vult de lijst met niet geplande containers
             foreach (Container c in ctrl.containers)
@@ -56,29 +54,28 @@ namespace Vrachtschip_applicatie
                 }
             }
 
+            //kijken wat voor type containers het zijn, en deze vervolgens toevoegen aan de bijbehorende list
             foreach (Container c in unplannedcontainers)
             {
                 if (c.Type.ToString() == "Waardevol")
                 {
                     waardevollecontainers.Add(c);
                 }
-            }
-
-            foreach (Container c in unplannedcontainers)
-            {
-                if (c.Type.ToString() == "Normaal")
+                else if (c.Type.ToString() == "Normaal")
                 {
                     gewonecontainers.Add(c);
                 }
-            }
-
-            foreach (Container c in unplannedcontainers)
-            {
-                if (c.Type.ToString() == "Gekoeld")
+                else if (c.Type.ToString() == "Gekoeld")
                 {
                     gekoeldecontainers.Add(c);
                 }
             }
+
+            //telt het aantal items van de listboxen
+            waardevollecount = waardevollecontainers.Count;
+            gewonecount = gewonecontainers.Count;
+            gekoeldecount = gekoeldecontainers.Count;
+
 
             //voegt de gevonden schepen en bestemmingen toe aan de combobox
             foreach (Vrachtschip v in ctrl.schepen)
@@ -117,52 +114,75 @@ namespace Vrachtschip_applicatie
                     //3d array om container waardes in te plaatsen
                     Container[, ,] indeling = new Container[schiphoogte, rijen, containersperrij];
 
-                    //array loop voor gekoelde
+
+                    //array loop voor gekoelde containers (NIEUW)
+                    int countgekoeld = 0;
                     for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
                     {
-                        for (int breedte = 0; breedte <= rijen - 1; breedte++)
+                        for (int diepte = 0; diepte <= 0; diepte++)
                         {
-                            for (int diepte = 0; diepte <= 0; diepte++)
+                            for (int breedte = 0; breedte <= rijen - 1; breedte++)
                             {
                                 foreach (Container c in gekoeldecontainers)
                                 {
-                                    indeling[hoogte, breedte, diepte] = c;
+                                    countgekoeld++;
+                                    if (countgekoeld >= gekoeldecount)
+                                    {
+                                        break;
+                                    }
+                                        indeling[hoogte, breedte, diepte] = c;
+                                        break;
                                 }
                             }
                         }
                     }
 
-                    //array loop voor waardevolle
-                    for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
+                    int countwaardevol = 0;
+                    //array voor waardevolle containers
+                    for (int hoogte = 0; hoogte <= schiphoogte - 2; hoogte++)
                     {
-                        for (int breedte = 1; breedte <= rijen - 2; breedte++)
+                        for (int diepte = 1; diepte <= containersperrij - 2; diepte++)
                         {
-                            for (int diepte = 1; diepte <= containersperrij - 2; diepte++)
+                            for (int breedte = 1; breedte <= rijen - 2; breedte++)
                             {
                                 foreach (Container c in waardevollecontainers)
                                 {
+                                    countwaardevol++;
+                                    if (countwaardevol >= waardevollecount)
+                                    {
+                                        break;
+                                    }
                                     indeling[hoogte, breedte, diepte] = c;
+                                    break;
+                                    
                                 }
                             }
                         }
                     }
 
-
-                    //array loop voor gewone containers
+                    //array voor gewone containers
+                    int countgewoon = 0;
                     for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
                     {
-                        for (int breedte = 0; breedte <= rijen - 1; breedte++)
+                        for (int diepte = 1; diepte <= containersperrij - 1; diepte++)
                         {
-                            for (int diepte = 0; diepte <= containersperrij - 1; diepte++)
+                            for (int breedte = 1; breedte <= rijen - 1; breedte++)
                             {
                                 foreach (Container c in gewonecontainers)
                                 {
+                                    countgewoon++;
+                                    if (countgewoon >= gewonecount)
+                                    {
+                                        break;
+                                    }
                                     indeling[hoogte, breedte, diepte] = c;
+                                    break;
                                 }
                             }
                         }
                     }
 
+                  
 
                     //vult listbox met indelingsgegevens
                     for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
@@ -176,8 +196,15 @@ namespace Vrachtschip_applicatie
 
                             for (int diepte = 0; diepte <= containersperrij - 1; diepte++)
                             {
-                                regel = regel += indeling[hoogte, breedte, diepte].ToString() + " ";
-                                //lbGeneratedLayout.Items.Add(indeling[hoogte, breedte, diepte].ToString() + " ");
+                                if (indeling[hoogte, breedte, diepte] == null)
+                                {
+                                    
+                                    regel = regel += "_ ";
+                                }
+                                else
+                                {
+                                    regel = regel += indeling[hoogte, breedte, diepte].ToString() + " ";
+                                }
                             }
                             lbGeneratedLayout.Items.Add(regel);
                         }
@@ -189,6 +216,7 @@ namespace Vrachtschip_applicatie
                 MessageBox.Show("Er is geen schip en/of bestemming geselecteerd");
             }
         }
+
 
         //functie om terug te gaan naar het menu
         private void btnMenu_Click(object sender, EventArgs e)
