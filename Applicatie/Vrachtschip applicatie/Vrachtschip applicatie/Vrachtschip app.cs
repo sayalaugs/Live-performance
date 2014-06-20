@@ -165,17 +165,21 @@ namespace Vrachtschip_applicatie
 
 
                     //vult listbox met indelingsgegevens
-
                     for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
                     {
                         lbGeneratedLayout.Items.Add("Laag " + hoogte);
 
                         for (int breedte = 0; breedte <= rijen - 1; breedte++)
                         {
+                            string regel = "";
+
+
                             for (int diepte = 0; diepte <= containersperrij - 1; diepte++)
                             {
-                                lbGeneratedLayout.Items.Add(indeling[hoogte, breedte, diepte].Type.ToString() + " ");
+                                regel = regel += indeling[hoogte, breedte, diepte].ToString() + " ";
+                                //lbGeneratedLayout.Items.Add(indeling[hoogte, breedte, diepte].ToString() + " ");
                             }
+                            lbGeneratedLayout.Items.Add(regel);
                         }
                     }      
                 }
@@ -186,6 +190,7 @@ namespace Vrachtschip_applicatie
             }
         }
 
+        //functie om terug te gaan naar het menu
         private void btnMenu_Click(object sender, EventArgs e)
         {
             Menu menu = new Menu();
@@ -193,22 +198,24 @@ namespace Vrachtschip_applicatie
             menu.Show();
         }
 
+        //methode om de listbox gegevens weg te schrijven in een text file.
         private void btnExportInfo_Click(object sender, EventArgs e)
         {
             OpenFileDialog f = new OpenFileDialog();
 
             f.ShowDialog();
 
-            string textout = "";
+            //de text die uiteindelijk wordt weggschreven in het bestand
+            string indelingstext = "";
 
             // assume the li is a string - will fail if not
             foreach (string li in lbGeneratedLayout.Items)
             {
-                textout = textout + li + Environment.NewLine;
+                indelingstext = indelingstext + li + Environment.NewLine;
             }
 
-            textout = "Opgeslagen indelingsgegevens: " + Environment.NewLine + textout;
-            File.WriteAllText(f.FileName, textout);
+            indelingstext = "Opgeslagen indelingsgegevens: " + Environment.NewLine + indelingstext;
+            File.WriteAllText(f.FileName, indelingstext);
 
             MessageBox.Show("De gegevens zijn opgeslagen");
         }
