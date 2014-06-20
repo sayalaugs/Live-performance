@@ -108,6 +108,7 @@ namespace Vrachtschip_applicatie
 
         private void btnAddContainer_Click(object sender, EventArgs e)
         {
+            //atributen van een container
             Bedrijf company = db.GetCompany(cbContainerCompany.SelectedItem.ToString());
             int weight = Convert.ToInt32(tbContainerWeight.Text);
             string bestemming = cbContainerDestination.SelectedItem.ToString(); 
@@ -124,6 +125,7 @@ namespace Vrachtschip_applicatie
             }
         }
 
+        //navigeert terug naar het menu
         private void btnMenu_Click(object sender, EventArgs e)
         {
             Menu menu = new Menu();

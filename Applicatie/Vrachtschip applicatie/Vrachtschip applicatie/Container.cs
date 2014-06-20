@@ -33,6 +33,7 @@ namespace Vrachtschip_applicatie
             this.Bedrijf = Bedrijf;
         }
 
+        //aangepaste tostring voor eenvoudige weergave van containertype
         public override string ToString()
         {
             if (Type == ContainerType.Gekoeld)

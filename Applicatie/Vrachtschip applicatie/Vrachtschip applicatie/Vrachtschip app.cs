@@ -125,13 +125,18 @@ namespace Vrachtschip_applicatie
                             {
                                 foreach (Container c in gekoeldecontainers)
                                 {
-                                    countgekoeld++;
+                                   
                                     if (countgekoeld >= gekoeldecount)
                                     {
                                         break;
                                     }
+                                    if (indeling[hoogte, breedte, diepte] == null)
+                                    {
                                         indeling[hoogte, breedte, diepte] = c;
-                                        break;
+                                        countgekoeld++;
+                                        
+                                    }
+                                    break;
                                 }
                             }
                         }
@@ -147,14 +152,18 @@ namespace Vrachtschip_applicatie
                             {
                                 foreach (Container c in waardevollecontainers)
                                 {
-                                    countwaardevol++;
+
                                     if (countwaardevol >= waardevollecount)
                                     {
                                         break;
                                     }
-                                    indeling[hoogte, breedte, diepte] = c;
+                                    if (indeling[hoogte, breedte, diepte] == null)
+                                    {
+                                        indeling[hoogte, breedte, diepte] = c;
+                                        countwaardevol++;
+                                       
+                                    }
                                     break;
-                                    
                                 }
                             }
                         }
@@ -164,18 +173,22 @@ namespace Vrachtschip_applicatie
                     int countgewoon = 0;
                     for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
                     {
-                        for (int diepte = 1; diepte <= containersperrij - 1; diepte++)
+                        for (int diepte = 0; diepte <= containersperrij - 1; diepte++)
                         {
-                            for (int breedte = 1; breedte <= rijen - 1; breedte++)
+                            for (int breedte = 0; breedte <= rijen - 1; breedte++)
                             {
                                 foreach (Container c in gewonecontainers)
                                 {
-                                    countgewoon++;
                                     if (countgewoon >= gewonecount)
                                     {
                                         break;
                                     }
-                                    indeling[hoogte, breedte, diepte] = c;
+                                    if (indeling[hoogte, breedte, diepte] == null)
+                                    {
+                                        indeling[hoogte, breedte, diepte] = c;
+                                        countgewoon++;
+                                        
+                                    }
                                     break;
                                 }
                             }
@@ -208,7 +221,41 @@ namespace Vrachtschip_applicatie
                             }
                             lbGeneratedLayout.Items.Add(regel);
                         }
-                    }      
+                    }   
+   
+
+                    //zwaarte berekenen linkerhelft
+                    int gewichtlinks = 0;
+                    for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
+                    {
+                        for (int breedte = 0; breedte <= rijen / 2; breedte++)
+                        {
+                            for (int diepte = 0; diepte <= containersperrij - 1; diepte++)
+                            {
+                                if (indeling[hoogte, breedte, diepte] != null)
+                                {
+                                    gewichtlinks = gewichtlinks + indeling[hoogte, breedte, diepte].Gewicht;
+                                }
+                            }
+                        }
+                    }
+
+                    //zwaarte berekenen rechterhelft
+                    int gewichtrechts = 0;
+                    for (int hoogte = 0; hoogte <= schiphoogte - 1; hoogte++)
+                    {
+                        for (int breedte = rijen / 2 +1; breedte <= rijen / 2; breedte++)
+                        {
+                            for (int diepte = 0; diepte <= containersperrij - 1; diepte++)
+                            {
+                                if (indeling[hoogte, breedte, diepte] != null)
+                                {
+                                    gewichtrechts = gewichtrechts + indeling[hoogte, breedte, diepte].Gewicht;
+                                }
+                            }
+                        }
+                    }
+                    int a = 0;
                 }
             }
             catch (NullReferenceException)
