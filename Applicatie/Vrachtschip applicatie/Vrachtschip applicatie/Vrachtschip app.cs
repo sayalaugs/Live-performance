@@ -48,6 +48,10 @@ namespace Vrachtschip_applicatie
             else
             {
                 Vrachtschip ship = db.GetShip(cbShips.SelectedItem.ToString());
+
+                //hoogte, aantal rijen, lengte rijen
+                int[, ,] array = new int[3, 3, 7];
+                
             }
         }
 

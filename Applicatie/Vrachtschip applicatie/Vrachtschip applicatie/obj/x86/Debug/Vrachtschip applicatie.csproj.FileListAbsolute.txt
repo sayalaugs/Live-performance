@@ -13,3 +13,5 @@ C:\Users\Saya\Documents\GitHub\Live-performance\Applicatie\Vrachtschip applicati
 C:\Users\Saya\Documents\GitHub\Live-performance\Applicatie\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip_applicatie.Properties.Resources.resources
 C:\Users\Saya\Documents\GitHub\Live-performance\Applicatie\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip_applicatie.Form1.resources
 C:\Users\Saya\Documents\GitHub\Live-performance\Applicatie\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip applicatie.csproj.GenerateResource.Cache
+C:\Users\Saya\Documents\GitHub\Live-performance\Applicatie\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip_applicatie.AddItems.resources
+C:\Users\Saya\Documents\GitHub\Live-performance\Applicatie\Vrachtschip applicatie\Vrachtschip applicatie\obj\x86\Debug\Vrachtschip_applicatie.Menu.resources
